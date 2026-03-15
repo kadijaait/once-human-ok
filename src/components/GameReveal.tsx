@@ -8,7 +8,7 @@ export default function GameReveal() {
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([entry]) => { 
+      ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
         }
@@ -105,7 +105,7 @@ export default function GameReveal() {
             {[
               { value: "1M+", label: "Active Players" },
               { value: "FREE", label: "To Play" },
-              { value: "∞", label: "Co-op & PvP Modes" },
+              { value: "MODE", label: "PvE and Hardcore PvP" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-game text-2xl sm:text-3xl font-black text-teal mb-1">{stat.value}</div>
@@ -129,9 +129,9 @@ export default function GameReveal() {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-crimson-light/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
               <svg className="w-5 h-5 flex-shrink-0 relative z-10" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
               </svg>
-              <span className="relative z-10">Play — It's Free</span>
+              <span className="relative z-10">Play — Windows Only</span>
               {/* Pulsing dot */}
               <span className="relative z-10 w-2 h-2 rounded-full bg-white shadow-[0_0_10px_#fff] animate-heartbeat" />
             </a>

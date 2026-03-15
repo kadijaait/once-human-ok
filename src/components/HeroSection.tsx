@@ -3,12 +3,22 @@ import heroBg from "@/assets/hero-bg.jpg";
 import { TRACKING_URL } from "@/lib/constants";
 import { Volume2, VolumeX } from "lucide-react";
 
-import heroVideo from "@/assets/20260119.mp4";
+
 
 export default function HeroSection() {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoSrc, setVideoSrc] = useState<string | undefined>(undefined);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Defer video loading until after initial page render
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVideoSrc("/hero-video.mp4");
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     // Attempt autoplay immediately
@@ -72,13 +82,15 @@ export default function HeroSection() {
         style={{ opacity: videoLoaded ? 1 : 0, transition: "opacity 1s ease" }}
       >
         <video
-          src={heroVideo}
+          ref={videoRef}
+          src={videoSrc}
           autoPlay
           loop
           muted
           playsInline
+          preload="metadata"
           className="absolute w-auto min-w-full min-h-full max-w-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
-          onLoadedData={() => setVideoLoaded(true)}
+          onCanPlay={() => setVideoLoaded(true)}
         />
       </div>
 
